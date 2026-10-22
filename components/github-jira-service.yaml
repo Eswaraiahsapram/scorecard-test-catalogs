@@ -1,0 +1,48 @@
+# Two services with different GitHub repos so open-PR min/max/sum are not identical.
+# Jira project keys must exist in the cluster Jira. Change them if RHIDP does not.
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: scorecard-rhdh-plugins
+  title: Scorecard RHDH Plugins
+  description: >
+    GitHub, Jira, Dependabot, SonarQube, OpenSSF, and code coverage on one service.
+  annotations:
+    github.com/project-slug: redhat-developer/rhdh-plugins
+    backstage.io/source-location: url:https://github.com/redhat-developer/rhdh-plugins
+    github.com/dependabot: 'true'
+    jira/project-key: RHIDP
+    sonarqube.org/project-key: redhat-developer_rhdh-plugins
+    openssf/scorecard-location: https://api.securityscorecards.dev/projects/github.com/redhat-developer/rhdh-plugins
+    backstage.io/code-coverage: enabled
+  tags:
+    - scorecard
+    - github
+    - jira
+spec:
+  type: service
+  lifecycle: production
+  owner: group:development/guests
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: scorecard-rhdh
+  title: Scorecard RHDH
+  description: >
+    Second GitHub and Jira service so aggregation KPIs can compare two entities.
+    Uses a Jira label the way the local scorecard examples do.
+  annotations:
+    github.com/project-slug: redhat-developer/rhdh
+    backstage.io/source-location: url:https://github.com/redhat-developer/rhdh
+    jira/project-key: RHIDP
+    jira/label: JupiterTeam
+  tags:
+    - scorecard
+    - github
+    - jira
+spec:
+  type: service
+  lifecycle: production
+  owner: group:development/guests

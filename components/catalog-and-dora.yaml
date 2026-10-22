@@ -1,0 +1,55 @@
+# Catalog required-attribute metric (title present vs missing) and one DORA service.
+# The catalog metric only selects entities annotated with scorecard/example: catalog.
+# DORA also needs GitHub deployment data and a Jira incident project in the cluster.
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: scorecard-catalog-with-title
+  title: Catalog Scorecard With Title
+  description: Has metadata.title, so the catalog title check should pass.
+  annotations:
+    scorecard/example: catalog
+  tags:
+    - scorecard
+    - catalog
+spec:
+  type: service
+  lifecycle: production
+  owner: group:development/guests
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: scorecard-catalog-without-title
+  description: Omits metadata.title, so the catalog title check should fail.
+  annotations:
+    scorecard/example: catalog
+  tags:
+    - scorecard
+    - catalog
+spec:
+  type: service
+  lifecycle: production
+  owner: group:development/guests
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: scorecard-dora
+  title: Scorecard DORA
+  description: >
+    GitHub deployments plus Jira incidents for the DORA scorecard.
+    Change jira/incident-project-key if RSPT is not the incident project.
+  annotations:
+    github.com/project-slug: janus-qe/overlay-scorecard-backend-module-dora-test
+    backstage.io/source-location: url:https://github.com/janus-qe/overlay-scorecard-backend-module-dora-test
+    scorecard.io/dora: 'true'
+    jira/incident-project-key: RSPT
+  tags:
+    - scorecard
+    - dora
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/red-hat

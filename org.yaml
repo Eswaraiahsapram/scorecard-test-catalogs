@@ -1,0 +1,22 @@
+# Owner groups used by the example components.
+# Drop this file from catalog-info.yaml if these groups are already in the cluster.
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: guests
+  namespace: development
+  description: Guest team used by the scorecard test components
+spec:
+  type: team
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: red-hat
+  namespace: default
+  description: Default team used by the DORA scorecard example
+spec:
+  type: team
+  children: []

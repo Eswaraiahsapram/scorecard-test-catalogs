@@ -1,0 +1,12 @@
+# Register this file in the cluster catalog. Backstage follows spec.targets
+# relative to this file, so one location pulls in the org and both examples.
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: scorecard-test-catalogs
+  description: Scorecard catalog examples for cluster testing
+spec:
+  targets:
+    - ./org.yaml
+    - ./components/github-jira-service.yaml
+    - ./components/catalog-and-dora.yaml
